@@ -2,8 +2,10 @@ package br.com.infnet.tp2_legado.repository.aventura;
 
 import br.com.infnet.tp2_legado.model.aventura.Aventureiro;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AventureiroRepository extends JpaRepository<Aventureiro, Long> {
+public interface AventureiroRepository extends JpaRepository<Aventureiro, Long>, JpaSpecificationExecutor<Aventureiro> {
+    // O JpaSpecificationExecutor adiciona o suporte a filtros dinâmicos e paginação
 }
