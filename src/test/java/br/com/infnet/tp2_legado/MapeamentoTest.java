@@ -1,7 +1,7 @@
 package br.com.infnet.tp2_legado;
 
-import br.com.infnet.tp2_legado.model.Usuario;
-import br.com.infnet.tp2_legado.repository.UsuarioRepository;
+import br.com.infnet.tp2_legado.model.audit.Usuario;
+import br.com.infnet.tp2_legado.repository.audit.UsuarioRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

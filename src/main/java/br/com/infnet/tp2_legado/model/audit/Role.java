@@ -1,4 +1,4 @@
-package br.com.infnet.tp2_legado.model;
+package br.com.infnet.tp2_legado.model.audit;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -27,16 +27,16 @@ public class Role
     @OneToMany(mappedBy = "role")
     private Set<UserRole> userRoles;
 
-    // Relacionamento ManyToOne: Muitas roles pertencem a uma organização
+    // ManyToOne: Muitas roles pertencem a uma organização
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organizacao_id", nullable = false)
     private Organizacao organizacao;
 
-    // Relacionamento ManyToMany: Uma role tem muitas permissões
+    // ManyToMany: Uma role tem muitas permissões
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "role_permissions",
-            schema = "audit", // CRÍTICO: Não esqueça o schema na tabela de junção
+            schema = "audit",
             joinColumns = @JoinColumn(name = "role_id"),
             inverseJoinColumns = @JoinColumn(name = "permission_id")
     )

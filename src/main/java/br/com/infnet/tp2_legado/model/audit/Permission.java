@@ -1,4 +1,4 @@
-package br.com.infnet.tp2_legado.model;
+package br.com.infnet.tp2_legado.model.audit;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +13,6 @@ public class Permission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Mapeando para a coluna 'code' que o Hibernate não encontrou antes
     @Column(name = "code", nullable = false, unique = true)
     private String code;
 

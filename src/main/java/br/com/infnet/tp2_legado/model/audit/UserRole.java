@@ -1,4 +1,4 @@
-package br.com.infnet.tp2_legado.model;
+package br.com.infnet.tp2_legado.model.audit;
 
 import jakarta.persistence.*;
 import lombok.*;
