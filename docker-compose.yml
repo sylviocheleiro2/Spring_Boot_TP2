@@ -9,4 +9,4 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./scripts/02-aventura.sql:/docker-entrypoint-initdb.d/02-aventura.sql
+      - ./script/aventura.sql:/docker-entrypoint-initdb.d/99_aventura.sql
