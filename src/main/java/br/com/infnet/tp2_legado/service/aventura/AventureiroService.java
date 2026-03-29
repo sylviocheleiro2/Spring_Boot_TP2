@@ -2,6 +2,7 @@ package br.com.infnet.tp2_legado.service.aventura;
 
 import br.com.infnet.tp2_legado.dto.aventura.*;
 import br.com.infnet.tp2_legado.enums.ClasseAventureiro;
+import br.com.infnet.tp2_legado.enums.StatusMissao;
 import br.com.infnet.tp2_legado.model.audit.Organizacao;
 import br.com.infnet.tp2_legado.model.audit.Usuario;
 import br.com.infnet.tp2_legado.model.aventura.Aventureiro;
@@ -19,7 +20,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.domain.Page;
+
+import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -167,7 +172,8 @@ public class AventureiroService {
     }
 
     @Transactional(readOnly = true)
-    public AventureiroDetalheResponse obterDetalhes(Long id) {
+    public AventureiroDetalheResponse obterDetalhes(Long id)
+    {
         Aventureiro a = aventureiroRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Aventureiro não encontrado."));
 
@@ -199,5 +205,15 @@ public class AventureiroService {
                 totalParticipacoes,
                 ultimaMissao
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<RankingAventureiroResponse> gerarRanking(
+            Long organizacaoId,
+            StatusMissao status,
+            LocalDateTime inicio,
+            LocalDateTime fim) {
+
+        return aventureiroRepository.obterRanking(organizacaoId, status, inicio, fim);
     }
 }

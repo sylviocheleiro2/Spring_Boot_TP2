@@ -2,6 +2,7 @@ package br.com.infnet.tp2_legado.controller.aventura;
 
 import br.com.infnet.tp2_legado.dto.aventura.*;
 import br.com.infnet.tp2_legado.enums.ClasseAventureiro;
+import br.com.infnet.tp2_legado.enums.StatusMissao;
 import br.com.infnet.tp2_legado.service.aventura.AventureiroService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/aventureiros")
@@ -81,6 +85,16 @@ public class AventureiroController {
     public ResponseEntity<AventureiroDetalheResponse> obterDetalhes(@PathVariable Long id)
     {
         return ResponseEntity.ok(service.obterDetalhes(id));
+    }
+
+    @GetMapping("/ranking")
+    public ResponseEntity<List<RankingAventureiroResponse>> getRanking(
+            @RequestParam Long organizacaoId,
+            @RequestParam(required = false) StatusMissao status,
+            @RequestParam(required = false) LocalDateTime inicio,
+            @RequestParam(required = false) LocalDateTime fim) {
+
+        return ResponseEntity.ok(service.gerarRanking(organizacaoId, status, inicio, fim));
     }
 
 }

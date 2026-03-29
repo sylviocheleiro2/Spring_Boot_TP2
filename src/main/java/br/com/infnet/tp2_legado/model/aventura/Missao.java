@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -46,5 +47,5 @@ public class Missao {
 
     // Relacionamento com as participações (N:N com atributos)
     @OneToMany(mappedBy = "missao", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<ParticipacaoMissao> participacoes;
+    private Set<ParticipacaoMissao> participacoes = new HashSet<>();
 }

@@ -1,7 +1,6 @@
 package br.com.infnet.tp2_legado.service.aventura;
 
-import br.com.infnet.tp2_legado.dto.aventura.AventureiroParticipanteResponse;
-import br.com.infnet.tp2_legado.dto.aventura.MissaoDetalheResponse;
+import br.com.infnet.tp2_legado.dto.aventura.*;
 import br.com.infnet.tp2_legado.model.audit.Organizacao;
 import br.com.infnet.tp2_legado.model.aventura.Missao;
 
@@ -9,8 +8,6 @@ import br.com.infnet.tp2_legado.repository.audit.OrganizacaoRepository;
 import br.com.infnet.tp2_legado.repository.aventura.MissaoRepository;
 
 import br.com.infnet.tp2_legado.dto.audit.OrganizacaoResponse;
-import br.com.infnet.tp2_legado.dto.aventura.MissaoRequest;
-import br.com.infnet.tp2_legado.dto.aventura.MissaoResponse;
 import br.com.infnet.tp2_legado.enums.StatusMissao;
 import br.com.infnet.tp2_legado.enums.NivelPerigo;
 import org.springframework.data.domain.Page;
@@ -57,6 +54,8 @@ public class MissaoService {
                 salva.getTitulo(),
                 salva.getNivelPerigo(),
                 salva.getStatus(),
+                salva.getDataInicio(),
+                salva.getDataTermino(),
                 new OrganizacaoResponse(org.getId(), org.getNome())
         );
     }
@@ -102,6 +101,8 @@ public class MissaoService {
                 m.getTitulo(),
                 m.getNivelPerigo(),
                 m.getStatus(),
+                m.getDataInicio(),
+                m.getDataTermino(),
                 new OrganizacaoResponse(m.getOrganizacao().getId(), m.getOrganizacao().getNome())
         );
     }
@@ -129,6 +130,11 @@ public class MissaoService {
                 new OrganizacaoResponse(m.getOrganizacao().getId(), m.getOrganizacao().getNome()),
                 participantes
         );
+    }
+
+    @Transactional(readOnly = true)
+    public List<MissaoMetricasResponse> gerarRelatorioMetricas(Long organizacaoId, LocalDateTime inicio, LocalDateTime fim) {
+        return missaoRepository.obterMetricasPorPeriodo(organizacaoId, inicio, fim);
     }
 
 

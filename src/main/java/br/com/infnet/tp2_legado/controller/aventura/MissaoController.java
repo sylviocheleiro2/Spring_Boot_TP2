@@ -1,6 +1,7 @@
 package br.com.infnet.tp2_legado.controller.aventura;
 
 import br.com.infnet.tp2_legado.dto.aventura.MissaoDetalheResponse;
+import br.com.infnet.tp2_legado.dto.aventura.MissaoMetricasResponse;
 import br.com.infnet.tp2_legado.dto.aventura.MissaoRequest;
 import br.com.infnet.tp2_legado.dto.aventura.MissaoResponse;
 import br.com.infnet.tp2_legado.enums.NivelPerigo;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/missoes")
@@ -53,7 +55,14 @@ public class MissaoController {
         return ResponseEntity.ok(service.obterDetalhes(id));
     }
 
+    @GetMapping("/relatorios/metricas")
+    public ResponseEntity<List<MissaoMetricasResponse>> relatorioMetricas(
+            @RequestParam Long organizacaoId,
+            @RequestParam(required = false) LocalDateTime inicio,
+            @RequestParam(required = false) LocalDateTime fim) {
 
+        return ResponseEntity.ok(service.gerarRelatorioMetricas(organizacaoId, inicio, fim));
+    }
 
 
 }
