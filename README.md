@@ -57,3 +57,9 @@ Para executar os testes de integração (necessário banco de dados ativo):
 
 ## Estrutura de Dados
 O schema padrão utilizado é `aventura`. O banco de dados é validado na inicialização (`hibernate.ddl-auto: validate`).
+
+## Como Testar (Postman)
+Na pasta `/postman` deste repositório, encontra-se o arquivo `TP2_Aventura.postman_collection.json`.
+1. Importe este arquivo no Postman.
+2. Certifique-se de que a variável `base_url` está apontando para `http://localhost:8080`.
+3. Execute os requests em ordem (cadastros antes de consultas).
