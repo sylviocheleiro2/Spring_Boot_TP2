@@ -15,3 +15,5 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        default_schema: aventura
+#    open-in-view: false
